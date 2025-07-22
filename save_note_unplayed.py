@@ -1,13 +1,26 @@
+'''
+ファイル名：save_note_unplayed.py
+バージョン：V1.0
+作成者：宗近知生
+更新日：2025.07.15
+機能要約：このファイルは，tmp/にあるnote.jsonを引数indexに応じたパスにコピーする
+'''
 import shutil
 import os
 
 def save_note_unplayed(index: int) -> bool:
+    '''
+    関数名：save_note_unplayed
+    作成者：宗近知生
+    更新日：2025.07.15
+    機能要約：この関数は，tmp/にあるnote.jsonを引数indexに応じたパスにコピーする
+    '''
 
     if index not in (1, 2, 3, 4):
         print(f"エラー: index は 1〜4 の間で指定してください（指定された index: {index}）")
         return False
 
-    input_path = "tmp/" + "note.txt"
+    input_path = "tmp/" + "note.json"
     filename = os.path.basename(input_path)
     output_path = f"music/unplayed/{index}/{filename}"
 
@@ -22,5 +35,3 @@ def save_note_unplayed(index: int) -> bool:
         return True
     except Exception as e:
         return False
-    
-save_note_unplayed(1)

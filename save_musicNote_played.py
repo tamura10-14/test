@@ -1,9 +1,22 @@
+'''
+ファイル名：save_musicNote_played.py
+バージョン：V1.0
+作成者：宗近知生
+更新日：2025.07.15
+機能要約：このファイルは，引数indexに応じたパスのファイルと日時データ等を30個まで保存する
+'''
 import shutil
 import os
 from datetime import datetime
 
 def save_musicNote_played(index:int)->bool:
-
+    '''
+    関数名：save_musicNote_played
+    作成者：宗近知生
+    更新日：2025.07.15
+    機能要約：この関数は，引数indexに応じたパスのファイルと
+    　　　　　日時データとレベルを記載した.txtを30ディレクトリまで保存する
+    '''
     bound_index = 30
 
     if index not in (1, 2, 3, 4):
@@ -12,7 +25,7 @@ def save_musicNote_played(index:int)->bool:
 
     src_dir_path = f"music/unplayed/{index}"
 
-    files = ["music.wav","note.txt"]
+    files = ["music.wav","note.json"]
 
     if not os.path.exists(src_dir_path):
         print(f"エラー: 元ディレクトリが存在しません ({src_dir_path})")
@@ -48,7 +61,7 @@ def save_musicNote_played(index:int)->bool:
             dest_file_path = os.path.join(dest_dir_path, filename)
 
             if os.path.exists(src_file_path):
-                shutil.move(src_file_path, dest_file_path)
+                shutil.copy(src_file_path, dest_file_path) #moveより安全
             else:
                 print(f"警告: {filename} は存在しません")
 
@@ -63,5 +76,3 @@ def save_musicNote_played(index:int)->bool:
     except Exception as e:
         print(f"エラー: ファイル移動中に例外が発生しました: {e}")
         return False
-
-save_musicNote_played(1)
